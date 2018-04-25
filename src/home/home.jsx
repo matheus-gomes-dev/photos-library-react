@@ -1,5 +1,5 @@
 import React from 'react'
-import albumsList from '../album/data.album.js'
+import albumsList from '../album/album.data'
 
 export default props => {
 
