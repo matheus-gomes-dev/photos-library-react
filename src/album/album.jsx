@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import albumsData from './data'
+import albumsData from './data.album.js'
 
 export default class Album extends Component{
 
