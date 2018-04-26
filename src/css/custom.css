@@ -2,3 +2,11 @@
 	text-decoration: none !important;
 	color: black;
 }
+
+.fa:hover{
+	cursor: pointer;
+}
+
+.table-icon{
+	padding-left: 10px;
+}

@@ -49,7 +49,7 @@ const albumsData = [
 				rating: 3,
 				votes: 5,
 				id: 6,
-				description: ''
+				description: 'consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam'
 			},
 			{
 				url: 'https://kids.nationalgeographic.com/content/dam/kids/photos/articles/Other%20Explore%20Photos/R-Z/Wacky%20Weekend/Funny%20Animal%20Faces/ww-funny-animal-faces-goat.adapt.945.1.jpg',

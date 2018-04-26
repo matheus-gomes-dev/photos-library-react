@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import Icon from '../common/iconButton'
 import albumsData from './album.data'
 
 export default class Album extends Component{
@@ -6,6 +7,8 @@ export default class Album extends Component{
 	constructor(props){
 		super(props)
 		this.state = {...this.getAlbumInfo()}
+		this.sortByDescription = this.sortByDescription.bind(this)
+		this.sortByRating = this.sortByRating.bind(this)
 		this.renderTableRows();
 	}
 
@@ -15,6 +18,19 @@ export default class Album extends Component{
 		let albumID = window.location.href.substring(queryPosition+1, queryLength)
 		let albumInfo = albumsData.find(album => album.id === albumID)
 		return albumInfo;
+	}
+
+	sortByDescription(){
+		let pics = this.state.pictures;
+		pics.sort((a,b) => a.description.toLowerCase() < b.description.toLowerCase())
+		this.setState({...this.state, pictures: pics})
+
+	}
+
+	sortByRating(){
+		let pics = this.state.pictures;
+		pics.sort((a,b) => a.rating < b.rating)
+		this.setState({...this.state, pictures: pics})
 	}
 
 	renderTableRows(){
@@ -40,9 +56,15 @@ export default class Album extends Component{
 				<table className='table'>
 					<thead>
 						<tr>
-					        <th>Thumbnail</th>
-					        <th>Title</th>
-					        <th>Rating</th>
+					        <th>
+					        	<span>Thumbnail</span>
+					        </th>
+					        <th>
+					        	<span>Description</span>
+					        	<Icon icon='angle-down' style='table-icon' onClick={() => this.sortByDescription()}></Icon></th>
+					        <th>
+					        	<span>Rating</span>
+					        	<Icon icon='angle-down' style='table-icon' onClick={() => this.sortByRating()}></Icon></th>
       					</tr>
 					</thead>
 					<tbody>
