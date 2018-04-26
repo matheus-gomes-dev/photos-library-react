@@ -159,18 +159,11 @@ export default class Album extends Component{
 		this.setState({...this.state, pictures: auxArray});
 		if(this.state.sortingMethod === 'rating')
 			this.sortByRating();
-		console.log(this.state);
 		let infoToBeStored = this.state.pictures.map(item => ({id: item.id, rating: item.rating, votes: item.votes}))
-		console.log("Key armazenada:");
-		console.log(`photos_library_app_albumID_${this.state.id}`);
 		window.localStorage.setItem(`photos_library_app_albumID_${this.state.id}`, JSON.stringify(infoToBeStored));
-		//[{id:1, rating: 3, votes: 5}]
-
 	}
 
 	renderRatingStars(pictureObj, pictureID){
-
-		console.log(pictureObj, pictureID)
 
 		if(!pictureObj)
 			return false
