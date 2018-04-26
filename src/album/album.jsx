@@ -37,9 +37,8 @@ export default class Album extends Component{
 	}
 
 	componentDidMount() {
-		let aux = this.state.pictures
-		this.setState({...this.state, pictures: aux});
-		this.renderTableRows();
+		//reload stars with data from localStorage
+		this.state.pictures.map(pic => this.reloadStars(pic.id));
 	}
 
 	getAlbumInfo(){
@@ -50,30 +49,20 @@ export default class Album extends Component{
 		albumInfo.pictures.map((pic,index) => {
 			albumInfo.pictures[index].starsArray = arrayOfStars(pic.rating);
 		})
-		console.log(albumInfo)
 		albumInfo.pictures = this.checkLocalStorage(albumInfo)
-		console.log("!!!!!!!!!!!!!!!!!!")
-		console.log(albumInfo)
 		return albumInfo;
 	}
 
 	checkLocalStorage(originalAlbumInfo){
-		console.log("checkLocalStorage function...")
-		//window.localStorage.removeItem(`photos_library_app_albumID_${originalAlbumInfo.id}`);
-		//return
 		let storedAlbumInfo = window.localStorage.getItem(`photos_library_app_albumID_${originalAlbumInfo.id}`);
 		if(storedAlbumInfo === null)
 			return originalAlbumInfo.pictures;
 		storedAlbumInfo = JSON.parse(storedAlbumInfo);
 		const picsArray = originalAlbumInfo.pictures;
-		console.log("************");
-		console.log(picsArray);
-		console.log(storedAlbumInfo);
 		storedAlbumInfo.map(pic => {
 			let index = picsArray.findIndex(item => item.id === pic.id)
 			picsArray[index].rating = pic.rating;
 			picsArray[index].votes = pic.votes;
-			//[{id:1, rating: 3, votes: 5}]
 		});
 		return picsArray;
 	}
@@ -104,8 +93,6 @@ export default class Album extends Component{
 	}
 
 	reloadStars(picID){
-		console.log('teste');
-		console.log(this.state)
 		let auxArray = this.state.pictures
 		const picIndex = auxArray.findIndex(pic => pic.id === picID)
 		auxArray[picIndex].starsArray.map((star, index) => {
