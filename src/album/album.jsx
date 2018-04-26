@@ -49,9 +49,7 @@ export default class Album extends Component{
 		this.starHover = this.starHover.bind(this);
 		this.reloadStars = this.reloadStars.bind(this);
 		this.starClick = this.starClick.bind(this);
-		//this.showPic = this.showPic.bind(this);
 		this.openModal = this.openModal.bind(this);
-	    //this.afterOpenModal = this.afterOpenModal.bind(this);
     	this.closeModal = this.closeModal.bind(this);
 		this.renderTableRows();
 	}
@@ -62,15 +60,14 @@ export default class Album extends Component{
 	}
 
 	openModal(picID) {
-    	console.log("showPic!!!");
-		console.log(picID)
 		const picInfo = this.state.pictures.find(item => item.id === picID)
-		console.log(picInfo);
 		this.setState({
 			...this.state,
 			modalIsOpen: true,
 			currentDescription: picInfo.description,
-			currentImageSrc: picInfo.url
+			currentImageSrc: picInfo.url,
+			currentPic: picInfo,
+			currentPicId: picID
 		})
   	}
 
@@ -172,6 +169,12 @@ export default class Album extends Component{
 	}
 
 	renderRatingStars(pictureObj, pictureID){
+
+		console.log(pictureObj, pictureID)
+
+		if(!pictureObj)
+			return false
+
 		return pictureObj.starsArray.map((rating, starIndex) => {
 			return(
 				<Icon 
@@ -229,7 +232,6 @@ export default class Album extends Component{
 					</tbody>
 				</table>
 				<div>
-        			<button onClick={this.openModal}>Open Modal</button>
         			<div className='modal'>
 				        <Modal
 				          	isOpen={this.state.modalIsOpen}
@@ -243,6 +245,9 @@ export default class Album extends Component{
 				          		<br/>
 				          		<div className='img-description'>
 					          		<span>{this.state.currentDescription}</span>
+					          	</div>
+					          	<div className='img-rating'>
+					          		{this.renderRatingStars(this.state.currentPic, this.state.currentPicId)}
 					          	</div>
 					        </div>
 				          	
