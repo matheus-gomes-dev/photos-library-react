@@ -1,6 +1,22 @@
 import React, {Component} from 'react'
 import Icon from '../common/iconButton'
 import albumsData from './album.data'
+import Modal from 'react-modal';
+Modal.setAppElement('#app');
+
+const customStyles = {
+  content : {
+    top: '50%',
+    left: '50%',
+    right: 'auto',
+    bottom: 'auto',
+    marginRight: '-50%',
+    transform: 'translate(-50%, -50%)',
+    overlfow: 'scrol',
+    maxHeight: '90%',
+    maxWidth: '90%'
+  }
+};
 
 const arrayOfStars = rating => {
 	let starsArray = []
@@ -27,12 +43,16 @@ export default class Album extends Component{
 
 	constructor(props){
 		super(props)
-		this.state = {...this.getAlbumInfo(), sortingMethod: ''};
+		this.state = {...this.getAlbumInfo(), sortingMethod: '', modalIsOpen: false};
 		this.sortByDescription = this.sortByDescription.bind(this);
 		this.sortByRating = this.sortByRating.bind(this);
 		this.starHover = this.starHover.bind(this);
 		this.reloadStars = this.reloadStars.bind(this);
 		this.starClick = this.starClick.bind(this);
+		//this.showPic = this.showPic.bind(this);
+		this.openModal = this.openModal.bind(this);
+	    //this.afterOpenModal = this.afterOpenModal.bind(this);
+    	this.closeModal = this.closeModal.bind(this);
 		this.renderTableRows();
 	}
 
@@ -40,6 +60,23 @@ export default class Album extends Component{
 		//reload stars with data from localStorage
 		this.state.pictures.map(pic => this.reloadStars(pic.id));
 	}
+
+	openModal(picID) {
+    	console.log("showPic!!!");
+		console.log(picID)
+		const picInfo = this.state.pictures.find(item => item.id === picID)
+		console.log(picInfo);
+		this.setState({
+			...this.state,
+			modalIsOpen: true,
+			currentDescription: picInfo.description,
+			currentImageSrc: picInfo.url
+		})
+  	}
+
+  	closeModal() {
+    	this.setState({...this.state, modalIsOpen: false});
+  	}
 
 	getAlbumInfo(){
 		const queryPosition = window.location.href.indexOf('?')
@@ -155,7 +192,7 @@ export default class Album extends Component{
 		return this.state.pictures.map(pic => (
 			<tr key={`row_${pic.id}`}>
 				<td>
-					<img src={pic.url} width='50' height='50'/>
+					<img src={pic.url} onClick={() => this.openModal(pic.id)} width='50' height='50'/>
 				</td>
 				<td>
 					<span>{pic.description.length > 15 ? `${pic.description.substring(0,35)}...` : pic.description}</span>
@@ -191,6 +228,27 @@ export default class Album extends Component{
 						{this.renderTableRows()}
 					</tbody>
 				</table>
+				<div>
+        			<button onClick={this.openModal}>Open Modal</button>
+        			<div className='modal'>
+				        <Modal
+				          	isOpen={this.state.modalIsOpen}
+				          	onAfterOpen={this.afterOpenModal}
+				          	onRequestClose={this.closeModal}
+				          	style={customStyles}
+				          	contentLabel="Example Modal"
+				        >
+				          	<div className='text-center'>
+				          		<img src={this.state.currentImageSrc}/>
+				          		<br/>
+				          		<div className='img-description'>
+					          		<span>{this.state.currentDescription}</span>
+					          	</div>
+					        </div>
+				          	
+				        </Modal>
+				    </div>
+		      	</div>
 			</div>
 		)
 	}

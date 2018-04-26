@@ -4,7 +4,7 @@ const albumsData = [
 		title: 'Beautiful Nature',
 		pictures: [
 			{
-				url: 'http://prmurphy.com.au/wp-content/uploads/2015/10/pexels-photo-236047.jpg',
+				url: 'http://xemanhdep.com/gallery/amazing-nature-new/amazing-nature-new06.jpg',
 				rating: 5,
 				votes: 3,
 				id: 0,
@@ -65,7 +65,7 @@ const albumsData = [
 		title: 'Amazing Buildings',
 		pictures: [
 			{
-				url: 'http://zmeeed.info/wp-content/uploads/2017/03/modern-style-architecture-cool-cute-cool-real-architecture-buildings-futuristic-b-baihusi-com.jpg',
+				url: 'http://images.indianexpress.com/2017/03/taj-mahal-759.jpg',
 				rating: 5,
 				votes: 3,
 				id: 7,

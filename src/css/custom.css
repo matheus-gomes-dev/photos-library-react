@@ -14,3 +14,11 @@
 .yellow{
 	color: yellow;
 }
+
+img:hover{
+	cursor: pointer;
+}
+
+.img-description{
+	margin-top: 40px;
+}
