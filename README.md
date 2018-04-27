@@ -4,7 +4,7 @@ Single page application with react: a photos library where you can view and rate
 
 ![Alt Text](https://media.giphy.com/media/2shcnwFhrbV1Qu3x8T/giphy.gif)
 
-#Instructions
+# Instructions
 
 Clone this repository, then inside the folder run:
 ```
@@ -13,5 +13,5 @@ npm run dev
 ```
 That's it! The application will be running on *http://localhost:8080*.
 
-#Requisites:
+# Requisites:
 * npm
