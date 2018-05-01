@@ -1,6 +1,6 @@
 # Photos Library App (react)
 
-Single page application with react: a photos library where you can view and rate some pictures.
+Single page application with react: a photos library where you can view and rate some pictures. Ratings are stored in localStorage, and you can sort your photos by rating or description.
 
 ![Alt Text](https://media.giphy.com/media/2shcnwFhrbV1Qu3x8T/giphy.gif)
 
